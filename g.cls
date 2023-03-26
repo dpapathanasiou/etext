@@ -3445,6 +3445,7 @@
     \parindent 1em%
     \noindent
     \hb@xt@1.8em{\hss\@makefnmark}#1}
+\let\footref\relax
 \newcommand{\footref}[1]{%
   \begingroup
     \unrestored@protected@xdef\@thefnmark{\ref{#1}}%
@@ -3807,6 +3808,7 @@
     {% else both counter and within  are defined
      #3}}}
 
+\let\counterwithin\relax
 \newcommand{\counterwithin}{\@ifstar{\@csinstar}{\@csin}}
 \newcommand{\@csinstar}[2]{%
   \@ifbothcntrs{#1}{#2}{\@addtoreset{#1}{#2}}}
@@ -3814,6 +3816,7 @@
   \@ifbothcntrs{#1}{#2}{\@addtoreset{#1}{#2}%
                         \@namedef{the#1}{\@nameuse{the#2}.\arabic{#1}}}}
 
+\let\counterwithout\relax
 \newcommand{\counterwithout}{\@ifstar{\@csoutstar}{\@csout}}
 \newcommand{\@csoutstar}[2]{%
   \@ifbothcntrs{chngcntr}{#1}{#2}{\@removefromreset{#1}{#2}}}
