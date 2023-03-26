@@ -1,0 +1,177 @@
+\makeatletter
+\@ifundefined{onesided}{%
+  \documentclass[article]{g}}{%
+  \documentclass[oneside,article]{g}}
+\makeatother
+
+%
+% page layout
+%
+
+\setstocksize{8.0in}{5.25in}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\setlrmarginsandblock{0.5in}{0.5in}{*}
+\setulmarginsandblock{0.65in}{0.9in}{*}
+\setheadfoot{0.25in}{0.4in}
+\setheaderspaces{*}{0.25in}{*}
+\checkandfixthelayout
+
+\setlength{\parskip}{0pt}
+
+%
+% headers and footers
+%
+
+\makepagestyle{custom1}
+\makeevenhead{custom1}{}{}{}
+\makeevenfoot{custom1}{}{\textcolor{gcolor}{\thepage}}{}
+\makeoddhead{custom1}{}{}{}
+\makeoddfoot{custom1}{}{\textcolor{gcolor}{\thepage}}{}
+
+\newcommand{\thetitle}{}
+\newcommand{\theauthor}{}
+
+\makepagestyle{custom2}
+\makeevenhead{custom2}{}{\textcolor{gcolor}{\small\textsc{\expandafter\so\expandafter{\theauthor}}}}{}
+\makeevenfoot{custom2}{}{\textcolor{gcolor}{\thepage}}{}
+\makeoddhead{custom2}{}{\textcolor{gcolor}{\small\textsc{\expandafter\so\expandafter{\thetitle}}}}{}
+\makeoddfoot{custom2}{}{\textcolor{gcolor}{\thepage}}{}
+
+\aliaspagestyle{plain}{custom1}
+\aliaspagestyle{fancy}{custom2}
+\aliaspagestyle{chapter}{custom2}
+\aliaspagestyle{part}{empty}
+\aliaspagestyle{titlingpage}{empty}
+
+\pagestyle{fancy}
+
+%
+% part and chapter formatting
+%
+
+\renewcommand{\chapterheadstart}{%
+  \vskip 0 pt plus 50 pt%
+  \penalty -250%
+  \vskip 0pt plus -50 pt%
+  \vspace{1.8\baselineskip}}
+
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\printchapternum}{}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptertitle}[1]{%
+  \begin{center}%
+    {\large\itshape\bfseries\textcolor{gcolor}{#1}}%
+  \end{center}}
+\renewcommand{\afterchaptertitle}{%
+  \vspace{0.4\baselineskip}}
+\renewcommand{\clearforchapter}{}
+
+%
+% table of contents layout
+%
+
+\renewcommand{\tocheadstart}{}
+%\renewcommand{\aftertoctitle}{\vspace{0.3in}}
+\renewcommand{\printtoctitle}[1]{}
+
+\setpnumwidth{2.5em}
+\setrmarg{4.5em}
+\renewcommand{\cftdotsep}{9}
+
+\setlength{\cftbeforechapterskip}{2.5pt}
+\renewcommand{\cftchapterfont}{}
+\renewcommand{\cftchapterpresnum}{\hfill}
+\renewcommand{\cftchapteraftersnum}{\hspace*{1em}}
+\addtolength{\cftchapternumwidth}{1em}
+\renewcommand{\cftchapterleader}{\cftdotfill{\cftchapterdotsep}}
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+\renewcommand{\cftchapterpagefont}{}
+
+%\setlength{\cftbeforepartskip}{2.5pt}
+
+\renewcommand{\thepart}{}
+\renewcommand{\printpartname}{}
+\renewcommand{\printpartnum}{}
+\renewcommand{\cftpartfillnum}[1]{\par}
+
+\makeatletter
+  \@namedef{@plaintoc}{%
+    \ensureonecol
+    \par
+    \begingroup
+%%%      \parindent\z@ \parskip\cftparskip
+      \@nameuse{@tocmaketitle}
+      \phantomsection
+%      \addcontentsline{toc}{chapter}{#3}
+      \@starttoc{toc}%
+    \endgroup
+    \restorefromonecol}
+
+  \@namedef{@tocmaketitle}{%
+    \@nameuse{tocheadstart}
+   {\parindent\z@ \parskip\cftparskip
+    \interlinepenalty\@M
+%    \@nameuse{printtoctitle}{#3}%
+    \@nameuse{tocmark}%
+    \thispagestyle{empty}%
+    \@nameuse{aftertoctitle}
+   }
+    \@afterheading}
+\makeatother
+
+%
+% font selection
+%
+
+%\usepackage{palatino}
+%\usepackage{times}
+\usepackage{sabon}
+
+%
+% letterspacing, margin kerning
+%
+
+\usepackage{soul}
+\usepackage[activate=normal]{pdfcprot}
+
+%
+% color
+%
+
+\usepackage[usenames]{color}
+
+\makeatletter
+\@ifundefined{nocolor}{%
+  \definecolor{gcolor}{cmyk}{0,0.89,0.94,0.5}}{% dark red
+  \definecolor{gcolor}{rgb}{0,0,0}}
+\makeatother
+
+%
+% hyphenation and justification
+%
+
+\sloppy
+
+% 
+% commands used within the document
+%
+
+\newcommand{\gdash}{{---}{---}}
+
+\makeatletter
+\@ifundefined{noscintros}{%
+  \newcommand{\gintro}[1]{\textcolor{gcolor}{\textsc{#1}}}}{%
+  \newcommand{\gintro}[1]{#1}}
+\makeatother
+
+\newcommand{\gtitle}[1]{%
+  \renewcommand{\thetitle}{#1}%
+  \begin{center}{\Large\bfseries #1}\end{center}%
+  \medskip}
+
+\newcommand{\gauthor}[1]{%
+  \renewcommand{\theauthor}{#1}%
+  \begin{center}{\large #1}\end{center}%
+  \vspace{0.15in}%
+  \thispagestyle{plain}}

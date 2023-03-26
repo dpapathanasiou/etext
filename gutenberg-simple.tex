@@ -1,0 +1,26 @@
+\input gutenberg-common.tex
+
+\renewcommand{\partnamenum}{}
+\renewcommand{\beforepartskip}{\vspace*{0.35in}}
+\renewcommand{\midpartskip}{}
+\renewcommand{\afterpartskip}{\vspace{-0.1in}}
+
+\makeatletter
+\renewcommand{\@setuppart}{%
+  \beforepartskip}
+\renewcommand{\@endpart}{%
+  \afterpartskip}
+\makeatother
+
+\renewcommand{\printparttitle}[1]{%
+  \begin{minipage}{1.25in}{%
+    \rule{1.25in}{0.4pt}\par%
+    \vspace{-8pt}%
+    \rule{1.25in}{0.4pt}\par%
+    \vspace{4pt}%
+    \makebox[1.25in]{\Large{#1}}\par%
+    \vspace{-5pt}%
+    \rule{1.25in}{0.4pt}\par%
+    \vspace{-8pt}%
+    \rule{1.25in}{0.4pt}}%
+  \end{minipage}}

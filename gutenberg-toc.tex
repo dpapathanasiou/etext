@@ -1,0 +1,31 @@
+\input gutenberg-common.tex
+
+\renewcommand{\beforepartskip}{%
+  \null\vfil%
+  \setcounter{chapter}{0}}
+
+\renewcommand{\printchaptername}{%
+  \large\centering\itshape\textcolor{gcolor}{Chapter \thechapter \\}}
+
+\renewcommand{\parttitlefont}{\normalfont\huge}
+
+\renewcommand{\gtitle}[1]{%
+  \title{#1}
+  \renewcommand{\thetitle}{#1}}
+
+\renewcommand{\gauthor}[1]{%
+  \author{#1}
+  \renewcommand{\theauthor}{#1}%
+  \gtitlepage%
+  \gtableofcontents%
+  \cleartorecto}
+
+\newcommand{\gtitlepage}{%
+  \pagestyle{empty}
+  \date{}
+  \maketitle}
+
+\newcommand{\gtableofcontents}{%
+  \tableofcontents
+  \clearpage
+  \pagestyle{fancy}}
